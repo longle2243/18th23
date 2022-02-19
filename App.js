@@ -17,7 +17,7 @@ function GoToScreen({ screenName }) {
   return (
     <Button 
       title={`Go to ${screenName}`}
-      onPress={() => navigation.navigate(screenName)}
+      onPress={() => navigation.goBack}
     />
   );
 }
