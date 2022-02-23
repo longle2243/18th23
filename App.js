@@ -1,12 +1,16 @@
 import React from 'react';
-import { Text, View,Button} from 'react-native';
+import { Text, View, Button } from 'react-native';
+// import React, { useEffect, useState } from 'react';
+// import { sText, View, Button, ActivityIndicator, FlatList } from 'react-native';
 import { styles } from "./stylesheet";
+import { Loadsanpham } from "./loadsp";
 
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -15,34 +19,14 @@ const Tab = createBottomTabNavigator();
 function GoToScreen({ screenName }) {
   const navigation = useNavigation();
   return (
-    <Button 
-      title={`Go to ${screenName}`}
-      onPress={() => navigation.goBack}
+    <Button
+      title={`Xem chi tiet ${screenName}`}
+      onPress={() => navigation.navigate(screenName)}
     />
   );
 }
-function SanPham({ navigation }) {
-  return (
-    <View>
-      <View style={styles.container}>
-        <View style={{display: 'none'}}>
-        <GoToScreen screenName="Home" />
-        </View> 
-    </View>
-    {/* <BottomTabs/> */}
-    </View>
-    
-  );
-}
-function TaiKhoan({ navigation }) {
-  return (
-    <View style={styles.container}>
-        {/* <Text style={styles.text} onPress={()=>{navigation.navigate("HomeScreen")}}>Day la trang chi tiet San Pham</Text> */}
-        <GoToButton screenName="CaNhan" />
-    </View>
-  );
-}
-function Home({navigation}) {
+function Home({ navigation }) {
+
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -50,52 +34,118 @@ function Home({navigation}) {
           <GoToScreen screenName="SanPham" />
         </View>
       </View>
-    </View> 
-  );
-}
-function GioHang() {
-  return (
-    <View>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Gio Hang</Text>
-    </View>
-    <Drawers/>
     </View>
   );
 }
-function CaNhan() {
+function SanPham({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Ca Nhan</Text>
+    <View >
+      <GoToScreen screenName="Home" />
     </View>
+  );
+}
+function LienHe() {
+  return (
+    <View >
+      <Text> Day la trang thong tin lien he</Text>
+    </View>
+  );
+}
+
+// function GioHang() {
+//   return (
+//     <View >
+//       <Text> Day la trang thong tin GioHang</Text>
+//     </View>
+//   );
+// }
+function TaiKhoan() {
+  return (
+    <View >
+      <Text> Day la trang thong tin ca nhan</Text>
+    </View>
+  );
+}
+function Stacks() {
+  return (
+    <Stack.Navigator >
+      <Stack.Screen name="Home" component={BottomTabs} />
+      <Stack.Screen name="Drawers" component={Drawershome} />
+      <Stack.Screen name="SanPham" component={SanPham} />
+    </Stack.Navigator>
   );
 }
 function BottomTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeTabs" component={Drawers} options={{ headerShown: false }}/>
-      <Tab.Screen name="Gio Hang" component={GioHang} />
-      <Tab.Screen name="Ca Nhan" component={CaNhan} />
+      <Tab.Screen name="Home" component={Drawershome} options={{ headerShown: false }} />
+      <Tab.Screen name="GioHang" component={Drawersgiohang} options={{ headerShown: false }} />
+      <Tab.Screen name="LienHe" component={Drawerslienhe} options={{ headerShown: false }} />
     </Tab.Navigator>
-    
   );
 }
-function Drawers() {
+function Drawershome() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Homedawer" component={Home} />
-      <Drawer.Screen name="TaiKhoan" component={TaiKhoan} />
+    <Drawer.Navigator >
+      <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Drawer.Screen name="TaiKhoan" component={TaiKhoan} options={{ headerShown: false }} />
     </Drawer.Navigator>
   );
 }
+function Drawersgiohang() {
+  return (
+    <Drawer.Navigator >
+      <Drawer.Screen name="Home" component={Loadsanpham} options={{ headerShown: false }} />
+      <Drawer.Screen name="TaiKhoan" component={TaiKhoan} options={{ headerShown: false }} />
+    </Drawer.Navigator>
+  );
+}
+function Drawerslienhe() {
+  return (
+    <Drawer.Navigator >
+      <Drawer.Screen name="Home" component={LienHe} options={{ headerShown: false }} />
+      <Drawer.Screen name="TaiKhoan" component={TaiKhoan} options={{ headerShown: false }} />
+    </Drawer.Navigator>
+  );
+}
+// const Loadsanpham = async () =>{
+//   const [isLoading, setLoading] = useState(true);
+//   const [data, setData] = useState([]);
+
+//   const getData = () => {
+//     try {
+//       const response =  fetch('https://lql2243.000webhostapp.com');
+//       const json =  response.json();
+//       setData(json);
+//     } catch (error) {
+//       console.error(error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
+
+//   useEffect(() => {
+//     getData();
+//   }, []);
+
+//   return (
+//     <View style={{ flex: 1, padding: 24 }}>
+//       {isLoading ? <ActivityIndicator /> : (
+//         <FlatList
+//           data={data}
+//           keyExtractor={({ id }, index) => id}
+//           renderItem={({ item }) => (
+//             <Text>{item.id}, {item.ten}</Text>
+//           )}
+//         />
+//       )}
+//     </View>
+//   );
+// }
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator >
-        <Stack.Screen name="HomeStack" component={BottomTabs} options={{ headerShown: false }}/>
-        <Stack.Screen name="SanPham" component={SanPham} />
-        <Stack.Screen name="Drawers" component={Drawers} options={{ headerShown: false }}/>
-      </Stack.Navigator>
+      <Stacks />
     </NavigationContainer>
   );
 }
