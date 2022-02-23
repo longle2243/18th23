@@ -1,9 +1,7 @@
-import React from 'react';
-import { Text, View, Button } from 'react-native';
-// import React, { useEffect, useState } from 'react';
-// import { sText, View, Button, ActivityIndicator, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, Button, ActivityIndicator, FlatList } from 'react-native';
 import { styles } from "./stylesheet";
-import { Loadsanpham } from "./loadsp";
+// import { Loadsanpham } from "./loadsp";
 
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -25,18 +23,18 @@ function GoToScreen({ screenName }) {
     />
   );
 }
-function Home({ navigation }) {
+// function Home({ navigation }) {
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.box}>
-        <View style={styles.inner}>
-          <GoToScreen screenName="SanPham" />
-        </View>
-      </View>
-    </View>
-  );
-}
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.box}>
+//         <View style={styles.inner}>
+//           <GoToScreen screenName="SanPham" />
+//         </View>
+//       </View>
+//     </View>
+//   );
+// }
 function SanPham({ navigation }) {
   return (
     <View >
@@ -52,13 +50,13 @@ function LienHe() {
   );
 }
 
-// function GioHang() {
-//   return (
-//     <View >
-//       <Text> Day la trang thong tin GioHang</Text>
-//     </View>
-//   );
-// }
+function GioHang() {
+  return (
+    <View >
+      <Text> Day la trang thong tin GioHang</Text>
+    </View>
+  );
+}
 function TaiKhoan() {
   return (
     <View >
@@ -87,7 +85,7 @@ function BottomTabs() {
 function Drawershome() {
   return (
     <Drawer.Navigator >
-      <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Drawer.Screen name="Home" component={Loadsanpham} options={{ headerShown: false }} />
       <Drawer.Screen name="TaiKhoan" component={TaiKhoan} options={{ headerShown: false }} />
     </Drawer.Navigator>
   );
@@ -95,7 +93,7 @@ function Drawershome() {
 function Drawersgiohang() {
   return (
     <Drawer.Navigator >
-      <Drawer.Screen name="Home" component={Loadsanpham} options={{ headerShown: false }} />
+      <Drawer.Screen name="Home" component={GioHang} options={{ headerShown: false }} />
       <Drawer.Screen name="TaiKhoan" component={TaiKhoan} options={{ headerShown: false }} />
     </Drawer.Navigator>
   );
@@ -108,40 +106,45 @@ function Drawerslienhe() {
     </Drawer.Navigator>
   );
 }
-// const Loadsanpham = async () =>{
-//   const [isLoading, setLoading] = useState(true);
-//   const [data, setData] = useState([]);
+const Loadsanpham = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-//   const getData = () => {
-//     try {
-//       const response =  fetch('https://lql2243.000webhostapp.com');
-//       const json =  response.json();
-//       setData(json);
-//     } catch (error) {
-//       console.error(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }
+  const getData = async () => {
+    try {
+      const response = await fetch('https://lql2243.000webhostapp.com');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-//   useEffect(() => {
-//     getData();
-//   }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
-//   return (
-//     <View style={{ flex: 1, padding: 24 }}>
-//       {isLoading ? <ActivityIndicator /> : (
-//         <FlatList
-//           data={data}
-//           keyExtractor={({ id }, index) => id}
-//           renderItem={({ item }) => (
-//             <Text>{item.id}, {item.ten}</Text>
-//           )}
-//         />
-//       )}
-//     </View>
-//   );
-// }
+  return (
+      <View style={styles.container}>
+      {isLoading ? <ActivityIndicator /> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+              <View style={styles.box}>
+                <View style={styles.inner}>
+                  <GoToScreen screenName="SanPham" />
+                  <Text>{item.id}, {item.ten}</Text>
+                </View>
+              </View>
+          )}
+        />
+      )}
+    </View>
+  );
+}
 export default function App() {
   return (
     <NavigationContainer>
