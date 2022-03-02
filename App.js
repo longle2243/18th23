@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  View,
-  Button,
-  ActivityIndicator,
-  FlatList,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -19,50 +11,20 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function GoToScreen({ screenName }) {
-  const navigation = useNavigation();
-  return (
-    <View style={{ display: 'none' }}>
-      <Button
-        title={`Xem chi tiet ${screenName}`}
-        onPress={() => navigation.navigate(screenName)}
-      />
-    </View>
-  );
-}
-function Home({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <View style={styles.box}>
-        <View style={styles.inner}>
-          <GoToScreen screenName="SanPham" />
-        </View>
-      </View>
-    </View>
-  );
-}
-function SanPham({ navigation }) {
-  return (
-    <View>
-      <GoToScreen screenName="Home" />
-    </View>
-  );
-}
-function LienHe() {
-  return (
-    <View>
-      <Text> Day la trang thong tin lien he</Text>
-    </View>
-  );
-}
+import {Loadsanpham} from './src/Home';
+import {SanPham} from './src/product';
+// import {SanPham} from './src/sanpham';
+import { GoToScreen } from './src/chuyentrang';
+import {styles} from './src/stylesheet';
+import {GioHang} from './src/giohang';
 
-function GioHang() {
-  return (
-    <View>
-      <Text> Day la trang thong tin GioHang</Text>
-    </View>
-  );
-}
+// function GioHang() {
+//   return (
+//     <View>
+//       <Text> Day la trang thong tin GioHang</Text>
+//     </View>
+//   );
+// }
 function TaiKhoan() {
   return (
     <View>
@@ -89,13 +51,9 @@ function BottomTabs() {
       />
       <Tab.Screen
         name="GioHang"
-        component={Drawersgiohang}
+        component={GioHang}
         options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="LienHe"
-        component={Drawerslienhe}
-        options={{ headerShown: false }}
+        
       />
     </Tab.Navigator>
   );
@@ -116,80 +74,7 @@ function Drawershome() {
     </Drawer.Navigator>
   );
 }
-function Drawersgiohang() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="Home"
-        component={GioHang}
-        options={{ headerShown: false }}
-      />
-      <Drawer.Screen
-        name="TaiKhoan"
-        component={TaiKhoan}
-        options={{ headerShown: false }}
-      />
-    </Drawer.Navigator>
-  );
-}
-function Drawerslienhe() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="Home"
-        component={LienHe}
-        options={{ headerShown: false }}
-      />
-      <Drawer.Screen
-        name="TaiKhoan"
-        component={TaiKhoan}
-        options={{ headerShown: false }}
-      />
-    </Drawer.Navigator>
-  );
-}
-const Loadsanpham = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
-  const getData = async () => {
-    try {
-      const response = await fetch(
-        'https://lql2243.000webhostapp.com/sanpham.php'
-      );
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  return (
-    <View>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          // style={styles.container}
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            <View >
-                <Text>{item.ten}</Text>
-                <Image style={styles.tinyLogo} source={{ uri: item.hinh }} />
-                <Text>{item.gia}</Text>
-                <GoToScreen screenName="SanPham" />
-            </View>
-          )}
-        />
-      )}
-    </View>
-  );
-};
 export default function App() {
   return (
     <NavigationContainer>
@@ -198,27 +83,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '85%',
-    padding: 5,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  box: {
-    width: '50%',
-    height: '50%',
-    padding: 5,
-  },
-  inner: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tinyLogo: {
-    width: 150,
-    height: 240,
-  },
-});
+
