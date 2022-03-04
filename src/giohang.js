@@ -10,13 +10,20 @@ import {
     SafeAreaView
 } from 'react-native';
 // import { styles } from './stylesheet';
-
+import { auth, signOut } from "../firebase";
 import { GoToScreen } from './chuyentrang';
 
 export function GioHang({ navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     // const { itemId } = route.params;
+    const handleSignout = () => {
+        signOut(auth)
+          .then(() => {
+            navigation.replace("Login");
+          })
+          .catch((error) => alert(error.message));
+      };
     const getData = async () => {
         try {
             const response = await fetch(

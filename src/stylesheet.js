@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '85%',
-    padding: 5,
+    // padding: 5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     // backgroundColor: 'yellow',
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   // },
   hinh: {
     width: 155,
-    height: 195,
+    height: 175,
     resizeMode: 'cover',
     // borderRadius: 5,
     borderTopLeftRadius: 5,
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
   khungngoai: {
     padding: 5,
-    // backgroundColor: 'azure', 
+    backgroundColor: 'azure', 
   },
   khungsanpham: {
     flex: 1,
@@ -40,11 +40,12 @@ export const styles = StyleSheet.create({
     // backgroundColor: 'yellow',
   },
   text: {
-    fontSize: 13,
+    marginTop: 10,
+    fontSize: 15,
     color:'grey',
   },
   gia:{
-    marginTop: 5,
+    marginTop: 10,
     fontSize: 18,
     fontWeight: 'bold',
     color:'#00BFFF',
@@ -60,7 +61,7 @@ export const styles = StyleSheet.create({
     // shadowOpacity: 1,
     // shadowRadius: 6,  
     // elevation: 5,
-    padding: 10,
+    padding: 8,
     shadowColor: '#00000021',
         shadowOffset: {
             width: 0,
@@ -76,5 +77,12 @@ export const styles = StyleSheet.create({
   //   shadowOpacity: 1,
   //   shadowRadius: 6,  
   //   elevation: 5,
+  },
+  timkiem:{
+    // backgroundColor: 'yellow',
+  },
+  khungsao:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

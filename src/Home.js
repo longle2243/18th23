@@ -6,8 +6,10 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Rating,SearchBar } from 'react-native-elements';
 import { styles } from './stylesheet';
 
 import { GoToScreen } from './chuyentrang';
@@ -33,8 +35,26 @@ export const Loadsanpham = () => {
     getData();
   }, []);
 
+
+  // const ratingCompleted = (rating: number) => {
+  //   console.log('Rating is: ' + rating);
+  // };
+  const [search, setSearch] = useState("");
+
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
   return (
     <View >
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={updateSearch}
+        value={search}
+        lightTheme
+        platform={Platform.OS}
+        style={styles.timkiem}
+        containerStyle={{ backgroundColor: 'white'  }}
+      />
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -47,23 +67,31 @@ export const Loadsanpham = () => {
           renderItem={({ item }) => (
             <View style={styles.khungsanpham}>
               <View style={styles.khungchuatext} >
-              <TouchableOpacity onPress={() => {
-                navigation.navigate("SanPham", {
-                  itemId: item.id,
-                });
-              }}>
-                <View style={styles.viewimage}>
-                <Image style={styles.hinh} source={{ uri: item.hinh }} />
-                </View>
-              </TouchableOpacity>
-              
-                <Text style={styles.gia}>{item.gia}</Text>
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate("SanPham", {
+                    itemId: item.id,
+                  });
+                }}>
+                  <View style={styles.viewimage}>
+                    <Image style={styles.hinh} source={{ uri: item.hinh }} />
+                  </View>
+                </TouchableOpacity>
+
+                <View style={styles.khungsao}>
                 <Text style={styles.text}>{item.ten}</Text>
+                <Text style={styles.gia}>{item.gia}</Text>
                 {/* <GoToScreen
                     screenName="SanPham"
                     itemId={item.id}
                     itemName={item.ten}
                   /> */}
+                {/* <Rating
+                  // showRating
+                  imageSize={15}
+                  onFinishRating={ratingCompleted}
+                  style={{ paddingVertical: 10 }}
+                /> */}
+                </View>
               </View>
             </View>
           )}

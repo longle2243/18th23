@@ -10,7 +10,7 @@ import {
     SafeAreaView
 } from 'react-native';
 // import { styles } from './stylesheet';
-
+import { Rating,SearchBar } from 'react-native-elements';
 import { GoToScreen } from './chuyentrang';
 
 export function SanPham({ route, navigation }) {
@@ -44,6 +44,11 @@ export function SanPham({ route, navigation }) {
     useEffect(() => {
         getData();
     }, []);
+
+    const ratingCompleted = (rating: number) => {
+        console.log('Rating is: ' + rating);
+      };
+
     return (
         <SafeAreaView style={styles.container}>
             {isLoading ? (
@@ -59,6 +64,12 @@ export function SanPham({ route, navigation }) {
                                 <Image style={styles.productImg} source={{ uri: item.hinh }} />
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.price}>{item.gia}</Text>
+                                <Rating
+                                    // showRating
+                                    imageSize={30}
+                                    onFinishRating={ratingCompleted}
+                                    style={{ paddingVertical: 10 }}
+                                />
                             </View>
                             <View style={styles.addToCarContainer}>
                                 <TouchableOpacity style={styles.shareButton}>
@@ -77,9 +88,11 @@ export function SanPham({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 20,
+        // marginTop: 20,
+        backgroundColor: 'white',
     },
     productImg: {
+        marginTop: 20,
         width: 300,
         height: 400,
         resizeMode: 'contain',

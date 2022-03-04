@@ -17,6 +17,8 @@ import {SanPham} from './src/product';
 import { GoToScreen } from './src/chuyentrang';
 import {styles} from './src/stylesheet';
 import {GioHang} from './src/giohang';
+import {TaiKhoan} from './src/taikhoan';
+import { Login } from './src/login';
 
 // function GioHang() {
 //   return (
@@ -25,17 +27,18 @@ import {GioHang} from './src/giohang';
 //     </View>
 //   );
 // }
-function TaiKhoan() {
-  return (
-    <View>
-      <Text> Day la trang thong tin ca nhan</Text>
-    </View>
-  );
-}
+// function TaiKhoan() {
+//   return (
+//     <View>
+//       <Text> Day la trang thong tin ca nhan</Text>
+//     </View>
+//   );
+// }
 function Stacks() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={BottomTabs} />
+      <Stack.Screen name="Home" component={BottomTabs}/>
+      <Stack.Screen name="LogIn" component={Login}/>
       <Stack.Screen name="Drawers" component={Drawershome} />
       <Stack.Screen name="SanPham" component={SanPham} />
     </Stack.Navigator>
@@ -69,6 +72,11 @@ function Drawershome() {
       <Drawer.Screen
         name="TaiKhoan"
         component={TaiKhoan}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Logout"
+        component={GoToScreen}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>
