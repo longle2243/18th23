@@ -70,7 +70,7 @@ export function Signup({ navigation }) {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={()=>{navigation.navigate("Login")}}
+        onPress={()=>{navigation.navigate("LogIn")}}
         style={[styles.button, styles.buttonOutline]}
       >
         <Text style={styles.buttonOutlineText}>Log In</Text>

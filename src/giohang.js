@@ -19,11 +19,11 @@ export function GioHang({ navigation }) {
     // const { itemId } = route.params;
     const handleSignout = () => {
         signOut(auth)
-          .then(() => {
-            navigation.replace("Login");
-          })
-          .catch((error) => alert(error.message));
-      };
+            .then(() => {
+                navigation.replace("LogIn");
+            })
+            .catch((error) => alert(error.message));
+    };
     const getData = async () => {
         try {
             const response = await fetch(
@@ -80,6 +80,11 @@ export function GioHang({ navigation }) {
                                 <TouchableOpacity style={styles.followButton}>
                                     <Text style={styles.followButtonText}>Đặt Hàng</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity style={styles.followButton}>
+                                    <Text style={styles.text} onPress={handleSignout}>
+                                        Log Out
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
                     )} />
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
         // marginTop: 20,
         // backgroundColor: "#eeeeee",
         backgroundColor: 'azure',
-        
+
     },
     userList: {
         flex: 1,

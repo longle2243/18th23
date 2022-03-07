@@ -11,7 +11,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Rating,SearchBar } from 'react-native-elements';
 import { styles } from './stylesheet';
-
+import { auth, signOut } from "../firebase";
 import { GoToScreen } from './chuyentrang';
 
 export const Loadsanpham = () => {
@@ -35,7 +35,13 @@ export const Loadsanpham = () => {
     getData();
   }, []);
 
-
+  const handleSignout = () => {
+    signOut(auth)
+      .then(() => {
+        navigation.replace("LogIn");
+      })
+      .catch((error) => alert(error.message));
+  };
   // const ratingCompleted = (rating: number) => {
   //   console.log('Rating is: ' + rating);
   // };
@@ -55,6 +61,11 @@ export const Loadsanpham = () => {
         style={styles.timkiem}
         containerStyle={{ backgroundColor: 'white'  }}
       />
+
+<Text style={styles.text} onPress={handleSignout}>
+        Log Out
+      </Text>
+
       {isLoading ? (
         <ActivityIndicator />
       ) : (

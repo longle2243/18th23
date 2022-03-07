@@ -30,7 +30,8 @@ export function Login({ navigation }) {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
       })
-      .catch(error => alert(error.message))
+      .catch(error => alert("Tai Khoan hoac mat khau khong khop"))
+      // .catch(error => alert(error.message))
   }
 
   return (

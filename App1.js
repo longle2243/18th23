@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from "react-native"; 
+import { Text, View } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -12,28 +13,50 @@ const Tab = createBottomTabNavigator();
 
 import {Loadsanpham} from './src/Home';
 import {SanPham} from './src/product';
+// import {SanPham} from './src/sanpham';
+import { GoToScreen } from './src/chuyentrang';
+import {styles} from './src/stylesheet';
 import {GioHang} from './src/giohang';
 import {TaiKhoan} from './src/taikhoan';
 import { Login } from './src/login';
 import { SignOut } from './src/Signout';
-import { Signup } from './src/signup';
+
 
 function Stacks() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="LogIn" component={Login} options={{ headerShown: false }}/>
-      <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
-      <Stack.Screen name="Home" component={Drawers} options={{ headerShown: false }}/>
+      <Stack.Screen name="Drawers" component={Loadsanpham} />
+      <Stack.Screen name="LogIn" component={Login}/>
+      <Stack.Screen name="Home" component={BottomTabs}/>
+      {/* <Stack.Screen name="Drawers" component={Drawershome} /> */}
+      <Stack.Screen name="SanPham" component={SanPham} />
     </Stack.Navigator>
   );
 }
-
-function Drawers() {
+function BottomTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={Drawershome}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="GioHang"
+        component={GioHang}
+        options={{ headerShown: false }}
+        
+      />
+    </Tab.Navigator>
+  );
+}
+function Drawershome() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
         name="Home"
-        component={Home}
+        component={Stacks}
+        // component={Loadsanpham}
         options={{ headerShown: false }}
       />
       <Drawer.Screen
@@ -42,44 +65,24 @@ function Drawers() {
         options={{ headerShown: false }}
       />
       <Drawer.Screen
-        name="SignOut"
+        name="Logout"
         component={SignOut}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Login"
+        component={Login}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>
   );
 }
 
-function Home() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={BottomTabs} />
-      <Stack.Screen name="SanPham" component={SanPham} />
-    </Stack.Navigator>
-  );
-}
-
-function BottomTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={Loadsanpham}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="GioHang"
-        component={GioHang}
-        options={{ headerShown: false }}        
-      />
-    </Tab.Navigator>
-  );
-}
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Stacks />
+      {/* <Stacks /> */}
+      <Drawershome/>
     </NavigationContainer>
   );
 }
