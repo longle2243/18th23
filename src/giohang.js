@@ -1,3 +1,4 @@
+import { getMultiFactorResolver } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import {
     Text,
@@ -27,7 +28,7 @@ export function GioHang({ navigation }) {
     const getData = async () => {
         try {
             const response = await fetch(
-                'https://lql2243.000webhostapp.com/chitietsanpham.php?',
+                'https://lql2243.000webhostapp.com/themgiohang.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -35,8 +36,11 @@ export function GioHang({ navigation }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        id: 1,
+                        // id: 5,
                         // id: itemId,
+                        iduser: auth.currentUser?.email,
+                        // iduser: "longle2243@gmail.com",
+                        
                     }),
                 }
             );
@@ -68,7 +72,10 @@ export function GioHang({ navigation }) {
                     style={styles.userList}
                     columnWrapperStyle={styles.listContainer}
                     data={data}
-                    // onRefresh={() => clickEventListener()}
+                    // onRefresh={getData}
+                    // onRefresh={() => this.onRefresh()}
+                    onRefresh={() => this.onRefresh()}
+                    refreshing={this.state.isFetching}
                     numColumns={1}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (

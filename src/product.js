@@ -12,7 +12,7 @@ import {
 // import { styles } from './stylesheet';
 import { Rating,SearchBar } from 'react-native-elements';
 import { GoToScreen } from './chuyentrang';
-
+import { auth, signOut } from "../firebase";
 export function SanPham({ route, navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -48,7 +48,30 @@ export function SanPham({ route, navigation }) {
     const ratingCompleted = (rating: number) => {
         console.log('Rating is: ' + rating);
       };
-
+    
+      const getData1 = async () => {
+        try {
+            const response = await fetch(
+                'https://lql2243.000webhostapp.com/themgiohang1.php?',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // id: 1,
+                        id: itemId,
+                        iduser: auth.currentUser?.email,
+                    }),
+                }
+            );
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <SafeAreaView style={styles.container}>
             {isLoading ? (
@@ -72,7 +95,7 @@ export function SanPham({ route, navigation }) {
                                 />
                             </View>
                             <View style={styles.addToCarContainer}>
-                                <TouchableOpacity style={styles.shareButton}>
+                                <TouchableOpacity style={styles.shareButton} onPress={getData1}>
                                     <Text style={styles.shareButtonText}>Thêm vào giỏ hàng</Text>
                                 </TouchableOpacity>
                                 <GoToScreen screenName="Home" />
