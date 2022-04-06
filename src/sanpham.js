@@ -13,7 +13,9 @@ export function SanPham({ route, navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const { itemId } = route.params;
+    const [isFetching, setFetching] = useState(false);
     const getData = async () => {
+        setFetching(true);
         try {
             const response = await fetch(
                 'https://lql2243.000webhostapp.com/chitietsanpham.php?',
@@ -34,6 +36,7 @@ export function SanPham({ route, navigation }) {
         } catch (error) {
             console.error(error);
         } finally {
+            setFetching(false);
             setLoading(false);
         }
     };
@@ -48,6 +51,8 @@ export function SanPham({ route, navigation }) {
                 <FlatList
                     style={styles.khungngoai}
                     data={data}
+                    onRefresh={getData}
+                    refreshing={false}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
                         <View style={styles.khungsanpham}>

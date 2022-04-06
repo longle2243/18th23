@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Rating,SearchBar } from 'react-native-elements';
+import { Rating, SearchBar } from 'react-native-elements';
 import { styles } from './stylesheet';
 import { auth, signOut } from "../firebase";
 import { GoToScreen } from './chuyentrang';
@@ -18,7 +18,9 @@ export const Loadsanpham = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const navigation = useNavigation();
+  const [isFetching, setFetching] = useState(false);
   const getData = async () => {
+    setFetching(true);
     try {
       const response = await fetch(
         'https://lql2243.000webhostapp.com/sanpham.php'
@@ -28,6 +30,7 @@ export const Loadsanpham = () => {
     } catch (error) {
       console.error(error);
     } finally {
+      setFetching(false);
       setLoading(false);
     }
   };
@@ -59,10 +62,10 @@ export const Loadsanpham = () => {
         lightTheme
         platform={Platform.OS}
         style={styles.timkiem}
-        containerStyle={{ backgroundColor: 'white'  }}
+        containerStyle={{ backgroundColor: 'white' }}
       />
 
-<Text style={styles.text} onPress={handleSignout}>
+      <Text style={styles.text} onPress={handleSignout}>
         Log Out
       </Text>
 
@@ -72,6 +75,8 @@ export const Loadsanpham = () => {
         <FlatList
           style={styles.khungngoai}
           data={data}
+          onRefresh={getData}
+          refreshing={isFetching}
           // onRefresh={() => clickEventListener()}
           numColumns={2}
           keyExtractor={({ id }, index) => id}
@@ -84,19 +89,19 @@ export const Loadsanpham = () => {
                   });
                 }}>
                   <View style={styles.viewimage}>
-                    <Image style={styles.hinh} source={{ uri: item.hinh }} />
+                    <Image style={styles.hinh} source={{ uri: 'https://lql2243.000webhostapp.com/img/yame.jpg'+item.hinh }} />
                   </View>
                 </TouchableOpacity>
 
                 <View style={styles.khungsao}>
-                <Text style={styles.text}>{item.ten}</Text>
-                <Text style={styles.gia}>{item.gia}</Text>
-                {/* <GoToScreen
+                  <Text style={styles.text}>{item.ten}</Text>
+                  <Text style={styles.gia}>{item.gia}</Text>
+                  {/* <GoToScreen
                     screenName="SanPham"
                     itemId={item.id}
                     itemName={item.ten}
                   /> */}
-                {/* <Rating
+                  {/* <Rating
                   // showRating
                   imageSize={15}
                   onFinishRating={ratingCompleted}

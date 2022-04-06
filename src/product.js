@@ -90,6 +90,7 @@ export function SanPham({ route, navigation }) {
                                 <Rating
                                     // showRating
                                     imageSize={30}
+                                    startingValue={1}
                                     onFinishRating={ratingCompleted}
                                     style={{ paddingVertical: 10 }}
                                 />

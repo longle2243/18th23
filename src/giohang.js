@@ -8,7 +8,8 @@ import {
     FlatList,
     Image,
     StyleSheet,
-    SafeAreaView
+    SafeAreaView,
+    Alert
 } from 'react-native';
 // import { styles } from './stylesheet';
 import { auth, signOut } from "../firebase";
@@ -17,6 +18,7 @@ import { GoToScreen } from './chuyentrang';
 export function GioHang({ navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [isFetching, setFetching] = useState(false);
     // const { itemId } = route.params;
     const handleSignout = () => {
         signOut(auth)
@@ -25,7 +27,9 @@ export function GioHang({ navigation }) {
             })
             .catch((error) => alert(error.message));
     };
+
     const getData = async () => {
+        setFetching(true);
         try {
             const response = await fetch(
                 'https://lql2243.000webhostapp.com/themgiohang.php?',
@@ -49,6 +53,7 @@ export function GioHang({ navigation }) {
         } catch (error) {
             console.error(error);
         } finally {
+            setFetching(false);
             setLoading(false);
         }
     };
@@ -62,6 +67,9 @@ export function GioHang({ navigation }) {
     //     });
     //   }
 
+    const dathang =()=>{
+        Alert.alert("Đặt hàng thành công");
+    }
     return (
         <SafeAreaView style={styles.container}>
             {isLoading ? (
@@ -72,10 +80,10 @@ export function GioHang({ navigation }) {
                     style={styles.userList}
                     columnWrapperStyle={styles.listContainer}
                     data={data}
-                    // onRefresh={getData}
+                    onRefresh={getData}
                     // onRefresh={() => this.onRefresh()}
-                    onRefresh={() => this.onRefresh()}
-                    refreshing={this.state.isFetching}
+                    // refreshing={false}
+                    refreshing={isFetching}
                     numColumns={1}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
@@ -84,7 +92,7 @@ export function GioHang({ navigation }) {
                             <View style={styles.cardContent}>
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.position}>{item.gia}</Text>
-                                <TouchableOpacity style={styles.followButton}>
+                                <TouchableOpacity style={styles.followButton} onPress={dathang}>
                                     <Text style={styles.followButtonText}>Đặt Hàng</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.followButton}>
