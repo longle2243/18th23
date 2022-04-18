@@ -5,25 +5,13 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '85%',
-    // padding: 5,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // backgroundColor: 'yellow',
   },
-  // box: {
-  //   padding: 5,
-  // },
-  // inner: {
-  //   flex: 1,
-  //   backgroundColor: 'white',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
   hinh: {
     width: 155,
     height: 175,
     resizeMode: 'cover',
-    // borderRadius: 5,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },
@@ -36,8 +24,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 8,
-    // borderWidth: 1,
-    // backgroundColor: 'yellow',
   },
   text: {
     marginTop: 10,

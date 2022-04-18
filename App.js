@@ -32,17 +32,12 @@ function Drawers() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
-        name="Home"
+        name="Trang chủ"
         component={Home}
         options={{ headerShown: false }}
       />
       <Drawer.Screen
-        name="TaiKhoan"
-        component={TaiKhoan}
-        options={{ headerShown: false }}
-      />
-      <Drawer.Screen
-        name="SignOut"
+        name="Thông tin cá nhân"
         component={SignOut}
         options={{ headerShown: false }}
       />
@@ -68,7 +63,7 @@ function BottomTabs() {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="GioHang"
+        name="Giỏ Hàng"
         component={GioHang}
         options={{ headerShown: false }}        
       />

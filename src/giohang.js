@@ -1,5 +1,6 @@
 import { getMultiFactorResolver } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
+import reactDom from 'react-dom';
 import {
     Text,
     View,
@@ -19,20 +20,13 @@ export function GioHang({ navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [isFetching, setFetching] = useState(false);
+    const [idsp, setIdsp] = useState([]);
     // const { itemId } = route.params;
-    const handleSignout = () => {
-        signOut(auth)
-            .then(() => {
-                navigation.replace("LogIn");
-            })
-            .catch((error) => alert(error.message));
-    };
-
     const getData = async () => {
         setFetching(true);
         try {
             const response = await fetch(
-                'https://lql2243.000webhostapp.com/themgiohang.php?',
+                'https://lql2243.000webhostapp.com/handle/giohang.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -67,9 +61,40 @@ export function GioHang({ navigation }) {
     //     });
     //   }
 
-    const dathang =()=>{
+    const dathang =  ()=>{
         Alert.alert("Đặt hàng thành công");
     }
+    const xoasp = () => {
+        Alert.alert("Xoa thanh cong");
+        // setIdsp(ids);
+        // setFetching(true);
+        // try {
+        //     const response = await fetch(
+        //         'https://lql2243.000webhostapp.com/handle/xoadonhang.php?',
+        //         {
+        //             method: 'POST',
+        //             headers: {
+        //                 Accept: 'application/json',
+        //                 'Content-Type': 'application/json',
+        //             },
+        //             body: JSON.stringify({
+        //                 // id: 12,
+        //                 id: idsp,
+        //                 // iduser: auth.currentUser?.email,
+        //                 // iduser: "longle2243@gmail.com",
+                        
+        //             }),
+        //         }
+        //     );
+        //     const json = await response.json();
+        //     setData(json);
+        // } catch (error) {
+        //     console.error(error);
+        // } finally {
+        //     setFetching(false);
+        //     setLoading(false);
+        // }
+    };
     return (
         <SafeAreaView style={styles.container}>
             {isLoading ? (
@@ -88,17 +113,15 @@ export function GioHang({ navigation }) {
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
                         <TouchableOpacity style={styles.card} >
-                            <Image style={styles.image} source={{ uri: item.hinh }} />
+                            <Image style={styles.image} source={{ uri: 'https://lql2243.000webhostapp.com/'+item.hinh }} />
                             <View style={styles.cardContent}>
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.position}>{item.gia}</Text>
                                 <TouchableOpacity style={styles.followButton} onPress={dathang}>
                                     <Text style={styles.followButtonText}>Đặt Hàng</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.followButton}>
-                                    <Text style={styles.text} onPress={handleSignout}>
-                                        Log Out
-                                    </Text>
+                                <TouchableOpacity style={styles.followButton1} onPress={xoasp} >
+                                    <Text style={styles.followButtonText} >Xóa</Text>
                                 </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
@@ -175,6 +198,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 25,
         backgroundColor: "#00BFFF",
+    },
+    followButton1: {
+        marginTop: 10,
+        height: 35,
+        width: 100,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 25,
+        backgroundColor: "red",
     },
     followButtonText: {
         color: "#FFFFFF",

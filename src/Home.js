@@ -23,7 +23,7 @@ export const Loadsanpham = () => {
     setFetching(true);
     try {
       const response = await fetch(
-        'https://lql2243.000webhostapp.com/sanpham.php'
+        'https://lql2243.000webhostapp.com/handle/danhsachsanpham.php'
       );
       const json = await response.json();
       setData(json);
@@ -45,11 +45,7 @@ export const Loadsanpham = () => {
       })
       .catch((error) => alert(error.message));
   };
-  // const ratingCompleted = (rating: number) => {
-  //   console.log('Rating is: ' + rating);
-  // };
   const [search, setSearch] = useState("");
-
   const updateSearch = (search) => {
     setSearch(search);
   };
@@ -64,11 +60,6 @@ export const Loadsanpham = () => {
         style={styles.timkiem}
         containerStyle={{ backgroundColor: 'white' }}
       />
-
-      <Text style={styles.text} onPress={handleSignout}>
-        Log Out
-      </Text>
-
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -89,24 +80,13 @@ export const Loadsanpham = () => {
                   });
                 }}>
                   <View style={styles.viewimage}>
-                    <Image style={styles.hinh} source={{ uri: 'https://lql2243.000webhostapp.com/img/yame.jpg'+item.hinh }} />
+                    <Image style={styles.hinh} source={{ uri: 'https://lql2243.000webhostapp.com/'+item.hinh }} />
                   </View>
                 </TouchableOpacity>
 
                 <View style={styles.khungsao}>
                   <Text style={styles.text}>{item.ten}</Text>
                   <Text style={styles.gia}>{item.gia}</Text>
-                  {/* <GoToScreen
-                    screenName="SanPham"
-                    itemId={item.id}
-                    itemName={item.ten}
-                  /> */}
-                  {/* <Rating
-                  // showRating
-                  imageSize={15}
-                  onFinishRating={ratingCompleted}
-                  style={{ paddingVertical: 10 }}
-                /> */}
                 </View>
               </View>
             </View>

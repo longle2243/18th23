@@ -7,7 +7,8 @@ import {
     FlatList,
     Image,
     StyleSheet,
-    SafeAreaView
+    SafeAreaView,
+    Alert
 } from 'react-native';
 // import { styles } from './stylesheet';
 import { Rating,SearchBar } from 'react-native-elements';
@@ -20,7 +21,7 @@ export function SanPham({ route, navigation }) {
     const getData = async () => {
         try {
             const response = await fetch(
-                'https://lql2243.000webhostapp.com/chitietsanpham.php?',
+                'https://lql2243.000webhostapp.com/handle/chitietsanpham.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -39,8 +40,10 @@ export function SanPham({ route, navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
+            
         }
     };
+
     useEffect(() => {
         getData();
     }, []);
@@ -50,9 +53,10 @@ export function SanPham({ route, navigation }) {
       };
     
       const getData1 = async () => {
+        // Alert.alert("Đặt hàng thành công");
         try {
             const response = await fetch(
-                'https://lql2243.000webhostapp.com/themgiohang1.php?',
+                'https://lql2243.000webhostapp.com/handle/themgiohang.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -70,6 +74,7 @@ export function SanPham({ route, navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
+            Alert.alert("Thêm vào giỏ thành công");
         }
     };
     return (
@@ -84,7 +89,7 @@ export function SanPham({ route, navigation }) {
                     renderItem={({ item }) => (
                         <View >
                             <View style={{ alignItems: 'center', marginHorizontal: 30 }}>
-                                <Image style={styles.productImg} source={{ uri: item.hinh }} />
+                                <Image style={styles.productImg} source={{ uri: 'https://lql2243.000webhostapp.com/'+item.hinh }} />
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.price}>{item.gia}</Text>
                                 <Rating
