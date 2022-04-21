@@ -10,18 +10,16 @@ import {
     SafeAreaView,
     Alert
 } from 'react-native';
-// import { styles } from './stylesheet';
-import { Rating,SearchBar } from 'react-native-elements';
-import { GoToScreen } from './chuyentrang';
-import { auth, signOut } from "../firebase";
-export function SanPham({ route, navigation }) {
+
+import { auth } from "../firebase";
+
+export function chitetsp({ route, navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const { itemId } = route.params;
     const getData = async () => {
         try {
-            const response = await fetch(
-                'https://lql2243.000webhostapp.com/handle/chitietsanpham.php?',
+            const response = await fetch('https://lql2243.000webhostapp.com/handle/chitietsanpham.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -29,7 +27,6 @@ export function SanPham({ route, navigation }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        // id: 1,
                         id: itemId,
                     }),
                 }
@@ -44,19 +41,11 @@ export function SanPham({ route, navigation }) {
         }
     };
 
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const ratingCompleted = (rating: number) => {
-        console.log('Rating is: ' + rating);
-      };
+    useEffect(() => {getData();}, []);
     
-      const getData1 = async () => {
-        // Alert.alert("Đặt hàng thành công");
+      const themgiohang = async () => {
         try {
-            const response = await fetch(
-                'https://lql2243.000webhostapp.com/handle/themgiohang.php?',
+            const response = await fetch('https://lql2243.000webhostapp.com/handle/themgiohang.php?',
                 {
                     method: 'POST',
                     headers: {
@@ -64,7 +53,6 @@ export function SanPham({ route, navigation }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        // id: 1,
                         id: itemId,
                         iduser: auth.currentUser?.email,
                     }),
@@ -92,19 +80,11 @@ export function SanPham({ route, navigation }) {
                                 <Image style={styles.productImg} source={{ uri: 'https://lql2243.000webhostapp.com/'+item.hinh }} />
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.price}>{item.gia}</Text>
-                                <Rating
-                                    // showRating
-                                    imageSize={30}
-                                    startingValue={1}
-                                    onFinishRating={ratingCompleted}
-                                    style={{ paddingVertical: 10 }}
-                                />
                             </View>
                             <View style={styles.addToCarContainer}>
-                                <TouchableOpacity style={styles.shareButton} onPress={getData1}>
+                                <TouchableOpacity style={styles.shareButton} onPress={themgiohang}>
                                     <Text style={styles.shareButtonText}>Thêm vào giỏ hàng</Text>
                                 </TouchableOpacity>
-                                <GoToScreen screenName="Home" />
                             </View>
                         </View>
                     )}
@@ -117,7 +97,6 @@ export function SanPham({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // marginTop: 20,
         backgroundColor: 'white',
     },
     productImg: {

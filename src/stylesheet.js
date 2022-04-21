@@ -2,19 +2,6 @@ import {
   StyleSheet
 } from 'react-native';
 export const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '85%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  hinh: {
-    width: 155,
-    height: 175,
-    resizeMode: 'cover',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
   khungngoai: {
     padding: 5,
     backgroundColor: 'azure', 
@@ -24,29 +11,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 8,
+    padding:5,
   },
-  text: {
-    marginTop: 10,
-    fontSize: 15,
-    color:'grey',
-  },
-  gia:{
-    marginTop: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color:'#00BFFF',
-  },
-  khungchuatext: {
-    //  backgroundColor: 'azure',
-     backgroundColor: 'white',
-    //  borderBottomLeftRadius: 5,
-    //  borderBottomRightRadius: 5,
+  khungsanpham2: {
+    backgroundColor: 'white',
     borderRadius: 5,
-    //  shadowColor: 'grey',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 1,
-    // shadowRadius: 6,  
-    // elevation: 5,
     padding: 8,
     shadowColor: '#00000021',
         shadowOffset: {
@@ -57,18 +26,28 @@ export const styles = StyleSheet.create({
         shadowRadius: 7.49,
         elevation: 12,
   },
-  viewimage:{
-  // shadowColor: 'grey',
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowOpacity: 1,
-  //   shadowRadius: 6,  
-  //   elevation: 5,
-  },
-  timkiem:{
-    // backgroundColor: 'yellow',
-  },
-  khungsao:{
+  khungtext:{
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  hinh: {
+    width: 155,
+    height: 200,
+    resizeMode: 'cover',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  text: {
+    marginTop: 10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    color:'grey',
+    
+  },
+  gia:{
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color:'#00BFFF',
   },
 });

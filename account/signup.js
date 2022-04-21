@@ -7,20 +7,16 @@ import {
   createUserWithEmailAndPassword,
 } from "../firebase";
 
-export function Signup({ navigation }) {
+export function signup({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.replace("Home");
-      }
+      if (user) {  navigation.replace("Home");  }
     });
-
-    return unsubscribe;
-  }, []);
+    return unsubscribe;}, []);
 
   const handleSignUp = () => {
     if(password!==password2){
@@ -35,10 +31,7 @@ export function Signup({ navigation }) {
   };
 
   return (
-    <View
-    style={styles.containerlogin}
-    behavior="padding"
-  >
+    <View  style={styles.containerlogin}  behavior="padding">
     <View style={styles.inputContainer}>
       <TextInput
         placeholder="Email"
@@ -70,7 +63,7 @@ export function Signup({ navigation }) {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={()=>{navigation.navigate("LogIn")}}
+        onPress={()=>{navigation.navigate("Login")}}
         style={[styles.button, styles.buttonOutline]}
       >
         <Text style={styles.buttonOutlineText}>Log In</Text>

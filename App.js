@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from "react-native"; 
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -10,19 +10,19 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-import {Loadsanpham} from './src/Home';
-import {SanPham} from './src/product';
-import {GioHang} from './src/giohang';
-import {TaiKhoan} from './src/taikhoan';
-import { Login } from './src/login';
-import { SignOut } from './src/Signout';
-import { Signup } from './src/signup';
+import {danhsachsp} from './src/danhsachsp';
+import {chitetsp} from './src/chitetsp';
+import {giohang} from './src/giohang';
+
+import { login } from './account/login';
+import { signup } from './account/signup';
+import { account } from './account/account';
 
 function Stacks() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="LogIn" component={Login} options={{ headerShown: false }}/>
-      <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
+      <Stack.Screen name="Login" component={login} options={{ headerShown: false }}/>
+      <Stack.Screen name="Signup" component={signup} options={{ headerShown: false }}/>
       <Stack.Screen name="Home" component={Drawers} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
@@ -38,7 +38,7 @@ function Drawers() {
       />
       <Drawer.Screen
         name="Thông tin cá nhân"
-        component={SignOut}
+        component={account}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>
@@ -49,7 +49,7 @@ function Home() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={BottomTabs} />
-      <Stack.Screen name="SanPham" component={SanPham} />
+      <Stack.Screen name="San Pham" component={chitetsp} />
     </Stack.Navigator>
   );
 }
@@ -58,13 +58,13 @@ function BottomTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={Loadsanpham}
+        name="Trang Chu"
+        component={danhsachsp}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Giỏ Hàng"
-        component={GioHang}
+        name="Gio Hang"
+        component={giohang}
         options={{ headerShown: false }}        
       />
     </Tab.Navigator>
@@ -73,9 +73,7 @@ function BottomTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stacks />
-    </NavigationContainer>
+    <NavigationContainer><Stacks/></NavigationContainer>
   );
 }
 
