@@ -46,7 +46,7 @@ export const danhsachsp = () => {
           renderItem={({ item }) => (
 
             <View >
-            <TouchableOpacity style={styles.khungsanpham} onPress={() => {  navigation.navigate("San Pham", {  itemId: item.id,});}}>
+            <TouchableOpacity style={styles.khungsanpham} onPress={() => {  navigation.navigate("Product", {  itemId: item.id,});}}>
               <View style={styles.khungsanpham2} >
 
                 <Image style={styles.hinh} source={{ uri:'https://lql2243.000webhostapp.com/'+item.hinh }}/>

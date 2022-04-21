@@ -44,10 +44,28 @@ export function giohang({ navigation }) {
     };
     useEffect(() => {getData();}, []);
 
-    const dathang =  ()=>{
-        Alert.alert("Đặt hàng thành công");
-    }
-
+    const dathang = async () => {
+        try {
+            const response = await fetch('https://lql2243.000webhostapp.com/handle/taodonhang.php?',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: idsp,
+                        iduser: auth.currentUser?.email,
+                    }),
+                }
+            );
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+            Alert.alert("Order successful");
+        }
+    };
     const xoasp = async () => {
         try {
             const response = await fetch('https://lql2243.000webhostapp.com/handle/xoadonhang.php?',
@@ -66,7 +84,7 @@ export function giohang({ navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
-            Alert.alert("Xoa thanh cong");
+            Alert.alert("Delete successful");
         }
     };
     return (
@@ -88,11 +106,11 @@ export function giohang({ navigation }) {
                             <View style={styles.cardContent}>
                                 <Text style={styles.name}>{item.ten}</Text>
                                 <Text style={styles.position}>{item.gia}</Text>
-                                <TouchableOpacity style={styles.followButton} onPress={dathang}>
-                                    <Text style={styles.followButtonText}>Đặt Hàng</Text>
+                                <TouchableOpacity style={styles.followButton} onPress={()=>{setIdsp(item.id);dathang();xoasp()}}>
+                                    <Text style={styles.followButtonText}>Order</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.followButton1} onPress={()=>{setIdsp(item.id);xoasp()}} >
-                                    <Text style={styles.followButtonText} >Xóa</Text>
+                                    <Text style={styles.followButtonText} >Delete</Text>
                                 </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
@@ -105,7 +123,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'azure',
-
     },
     userList: {
         flex: 1,

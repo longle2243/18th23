@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, TextInput,TouchableOpacity, } from "react-native";
+import { View, Text, TextInput,TouchableOpacity, } from "react-native";
 import { styles } from "../style/stylesheet";
 import {
   auth,
@@ -29,6 +29,25 @@ export function signup({ navigation }) {
       .catch((error) => alert(error.message));
     }
   };
+
+  // const themthongtin = () => {
+  //   try {
+  //       const response = fetch('https://lql2243.000webhostapp.com/handle/themthongtin.php?',
+  //           {
+  //               method: 'POST',
+  //               headers: {
+  //                   Accept: 'application/json',
+  //                   'Content-Type': 'application/json',
+  //               },
+  //               body: JSON.stringify({
+  //                   iduser: auth.currentUser?.email,
+  //               }),
+  //           }
+  //       );
+  //   } catch (error) {
+  //       console.error(error);
+  //   } 
+  // };
 
   return (
     <View  style={styles.containerlogin}  behavior="padding">

@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 import {danhsachsp} from './src/danhsachsp';
 import {chitetsp} from './src/chitetsp';
 import {giohang} from './src/giohang';
+import { lienhe } from './src/lienhe';
 
 import { login } from './account/login';
 import { signup } from './account/signup';
@@ -32,12 +33,12 @@ function Drawers() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
-        name="Trang chủ"
+        name="Shop"
         component={Home}
         options={{ headerShown: false }}
       />
       <Drawer.Screen
-        name="Thông tin cá nhân"
+        name="You"
         component={account}
         options={{ headerShown: false }}
       />
@@ -49,22 +50,32 @@ function Home() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={BottomTabs} />
-      <Stack.Screen name="San Pham" component={chitetsp} />
+      <Stack.Screen name="Product" component={chitetsp} />
     </Stack.Navigator>
   );
 }
 
 function BottomTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ tabBarLabelStyle: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      color:'grey',
+      marginBottom: 10,
+    },tabBarIconStyle: { display: "none" }}}>
       <Tab.Screen
-        name="Trang Chu"
+        name="Shop"
         component={danhsachsp}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Gio Hang"
+        name="Cart"
         component={giohang}
+        options={{ headerShown: false }}        
+      />
+      <Tab.Screen
+        name="Contact"
+        component={lienhe}
         options={{ headerShown: false }}        
       />
     </Tab.Navigator>

@@ -62,7 +62,7 @@ export function chitetsp({ route, navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
-            Alert.alert("Thêm vào giỏ thành công");
+            Alert.alert("Add Successful");
         }
     };
     return (
@@ -83,7 +83,7 @@ export function chitetsp({ route, navigation }) {
                             </View>
                             <View style={styles.addToCarContainer}>
                                 <TouchableOpacity style={styles.shareButton} onPress={themgiohang}>
-                                    <Text style={styles.shareButtonText}>Thêm vào giỏ hàng</Text>
+                                    <Text style={styles.shareButtonText}>Add to Cart</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
