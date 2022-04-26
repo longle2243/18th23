@@ -14,7 +14,6 @@ export function account() {
 
     return (
         <SafeAreaView style={styles.container}>
-          {/* <View style={styles.header}></View> */}
 
           <Image style={styles.header} source={{uri: 'https://lql2243.000webhostapp.com/img/avatar.jpg'}}/>
           <Image style={styles.avatar} source={{uri: 'https://lql2243.000webhostapp.com/img/avatar.jpg'}}/>

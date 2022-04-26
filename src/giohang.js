@@ -63,6 +63,7 @@ export function giohang({ navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
+            getData();
             Alert.alert("Order successful");
         }
     };
@@ -84,6 +85,7 @@ export function giohang({ navigation }) {
             console.error(error);
         } finally {
             setLoading(false);
+            getData();
             Alert.alert("Delete successful");
         }
     };

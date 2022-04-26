@@ -10,9 +10,9 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-import {danhsachsp} from './src/danhsachsp';
-import {chitetsp} from './src/chitetsp';
-import {giohang} from './src/giohang';
+import { danhsachsp } from './src/danhsachsp';
+import { chitetsp } from './src/chitetsp';
+import { giohang } from './src/giohang';
 import { lienhe } from './src/lienhe';
 
 import { login } from './account/login';
@@ -22,9 +22,9 @@ import { account } from './account/account';
 function Stacks() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={login} options={{ headerShown: false }}/>
-      <Stack.Screen name="Signup" component={signup} options={{ headerShown: false }}/>
-      <Stack.Screen name="Home" component={Drawers} options={{ headerShown: false }}/>
+      <Stack.Screen name="Login" component={login} options={{ headerShown: false }} />
+      <Stack.Screen name="Signup" component={signup} options={{ headerShown: false }} />
+      <Stack.Screen name="Home" component={Drawers} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
@@ -57,12 +57,16 @@ function Home() {
 
 function BottomTabs() {
   return (
-    <Tab.Navigator screenOptions={{ tabBarLabelStyle: {
-      fontSize: 15,
-      fontWeight: 'bold',
-      color:'grey',
-      marginBottom: 10,
-    },tabBarIconStyle: { display: "none" }}}>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: {
+          fontSize: 15,
+          fontWeight: 'bold',
+          color: 'grey',
+          marginBottom: 10,
+        },
+        tabBarIconStyle: { display: "none" }
+      }}>
       <Tab.Screen
         name="Shop"
         component={danhsachsp}
@@ -71,12 +75,12 @@ function BottomTabs() {
       <Tab.Screen
         name="Cart"
         component={giohang}
-        options={{ headerShown: false }}        
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Contact"
         component={lienhe}
-        options={{ headerShown: false }}        
+        options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );
@@ -84,7 +88,7 @@ function BottomTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer><Stacks/></NavigationContainer>
+    <NavigationContainer><Stacks /></NavigationContainer>
   );
 }
 
