@@ -18,6 +18,7 @@ import { lienhe } from './src/lienhe';
 import { login } from './account/login';
 import { signup } from './account/signup';
 import { account } from './account/account';
+import { taikhoan } from './account/taikhoan';
 
 function Stacks() {
   return (
@@ -40,6 +41,11 @@ function Drawers() {
       <Drawer.Screen
         name="You"
         component={account}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Tai khoan"
+        component={taikhoan}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>
@@ -88,7 +94,7 @@ function BottomTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer><Stacks /></NavigationContainer>
+    <NavigationContainer><Stacks/></NavigationContainer>
   );
 }
 

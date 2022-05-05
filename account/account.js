@@ -19,7 +19,7 @@ export function account() {
           <Image style={styles.avatar} source={{uri: 'https://lql2243.000webhostapp.com/img/avatar.jpg'}}/>
           <View style={styles.body}>
               <Text style={styles.name}>Quang Long</Text>
-              <Text style={styles.mail}>longle@gmail.com</Text>
+              <Text style={styles.mail}>{auth.currentUser?.email}</Text>
               <Text style={styles.mail}>Ninh kieu, Tp.Can Tho, Viet Nam</Text>
 
               <TouchableOpacity style={styles.buttonContainer1}>
