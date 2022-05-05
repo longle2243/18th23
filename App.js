@@ -43,11 +43,6 @@ function Drawers() {
         component={account}
         options={{ headerShown: false }}
       />
-      <Drawer.Screen
-        name="Tai khoan"
-        component={taikhoan}
-        options={{ headerShown: false }}
-      />
     </Drawer.Navigator>
   );
 }

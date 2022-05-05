@@ -54,7 +54,7 @@ export function taikhoan({ navigation }) {
                         <View >
                             <View style={{ alignItems: 'center', marginHorizontal: 30 }}>
                                 <Text style={styles.name}>{item.ten}</Text>
-                                <Text style={styles.price}>{item.gia}</Text>
+                                <Text style={styles.price}>{item.sdt}</Text>
                             </View>
                         </View>
                     )}
