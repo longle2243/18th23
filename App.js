@@ -18,7 +18,7 @@ import { lienhe } from './src/lienhe';
 import { login } from './account/login';
 import { signup } from './account/signup';
 import { account } from './account/account';
-import { taikhoan } from './account/taikhoan';
+import { edit, taikhoan } from './account/taikhoan';
 
 function Stacks() {
   return (
@@ -40,7 +40,7 @@ function Drawers() {
       />
       <Drawer.Screen
         name="You"
-        component={account}
+        component={You}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>
@@ -52,6 +52,15 @@ function Home() {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={BottomTabs} />
       <Stack.Screen name="Product" component={chitetsp} />
+    </Stack.Navigator>
+  );
+}
+
+function You() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Info" component={account} options={{ headerShown: false }}/>
+      <Stack.Screen name="Edit" component={edit} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }

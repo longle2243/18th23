@@ -13,8 +13,10 @@ export function account() {
   };
 
   const [isLoading, setLoading] = useState(true);
+  const [isFetching, setFetching] = useState(false);
   const [data, setData] = useState([]);
   const getData = async () => {
+    setFetching(true);
     try {
       const response = await fetch('https://lql2243.000webhostapp.com/handle/thongtinuser.php?',
         {
@@ -33,19 +35,22 @@ export function account() {
     } catch (error) {
       console.error(error);
     } finally {
+      setFetching(false);
       setLoading(false);
     }
   };
 
   useEffect(() => { getData(); }, []);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
           data={data}
-          scrollEnabled={false}
+          onRefresh={getData}
+          refreshing={isFetching}
+          // scrollEnabled={false}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
             <View >
@@ -57,7 +62,7 @@ export function account() {
                 <Text style={styles.mail}>SĐT: {item.sdt}</Text>
                 <Text style={styles.mail}>Dia chi: {item.diachi}</Text>
 
-                <TouchableOpacity style={styles.buttonContainer1}>
+                <TouchableOpacity style={styles.buttonContainer1} onPress={() => {navigation.navigate("Edit");}}>
                   <Text style={styles.text}>EDIT</Text>
                 </TouchableOpacity>
 
@@ -69,7 +74,7 @@ export function account() {
           )}
         />
       )}
-    </SafeAreaView>
+    </View>
 
   );
 }
